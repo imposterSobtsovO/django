@@ -1,0 +1,37 @@
+{% block content %}
+    <head>
+    <meta charset="utf-8"/>
+    <title> Our menu </title>
+        <style>
+        body{
+            background-image: url("/firstapp/static/images/Background.jpg");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+        }
+        .round{
+            border-radius: 100px;
+            border: 3px solid green;
+            box-shadow: 0 0 7px #666;
+        }
+        .tab {
+            margin-left: 100px;
+        }
+        .break-column {
+            flex-basis: 100%;
+            width: 0;
+        }
+    </style>
+<body class="container">
+{% csrf_token %}
+  {% if products.count > 0 %}
+    <h2 class = "tab"> Our perfect menu</h2>
+    <table class="tab" class="break-column">
+        {% for product in products %}
+        <tr><td><img src="{{ MEDIA_URL }}{{ product.image.url }}" width="80" height="100" class="round"/></td>
+            <td>{{product.name}}</td><td>{{ product.description }}</td><td>{{ product.price }}</td>
+        {% endfor %}
+    </table>
+    {% endif %}
+</body>
+{% endblock %}
